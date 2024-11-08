@@ -397,7 +397,7 @@ ProjectList.Item = ({
         <div className="w-44 text-border">
           <p>{date}</p>
         </div>
-        {children}
+        <div className="w-52 md:w-auto">{children}</div>
       </div>
     </div>
   );
