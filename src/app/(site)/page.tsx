@@ -1,5 +1,4 @@
 import HomeTyper from "@/components/sections/home/typer";
-import Link from "next/link";
 import Image from "next/image";
 
 import minimo from "$/profile/minimo.png";

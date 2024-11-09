@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function GlobalHeader() {
   const [scrolled, setScrolled] = useState(false);
