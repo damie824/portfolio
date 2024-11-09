@@ -34,7 +34,7 @@ main {
   --color-prettylights-syntax-brackethighlighter-angle: #768390;
   --color-prettylights-syntax-sublimelinter-gutter-mark: #545d68;
   --color-prettylights-syntax-constant-other-reference-link: #ffda72;
-  --color-btn-text: #cec5ad;
+  --color-btn-text: #ffffff;
   --color-btn-bg: #333027;
   --color-btn-border: #d1cab625;
   --color-btn-shadow: 0 0 #0000;
@@ -44,7 +44,7 @@ main {
   --color-btn-active-bg: #3d444d;
   --color-btn-active-border: #a59b81;
   --color-btn-selected-bg: #524c3e;
-  --color-btn-primary-text: #fff;
+  --color-btn-primary-text: #0f0f0f;
   --color-btn-primary-bg: #f9c537;
   --color-btn-primary-border: #d1cab625;
   --color-btn-primary-shadow: 0 0 #0000;
