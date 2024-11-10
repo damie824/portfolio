@@ -20,7 +20,7 @@ async function getPost(slug: string) {
   return post;
 }
 
-export const generateMetadata = async ({ params }: Props) => {
+export async function generateMetadata({ params }: Props) {
   const post = await getPost(params.slug.join("/"));
   return {
     title: post.title + " - 규연.데브",
@@ -42,7 +42,7 @@ export const generateMetadata = async ({ params }: Props) => {
       creator: "@damie824",
     },
   };
-};
+}
 
 export default async function BlogPage({ params }: Props) {
   const postId = params.slug.join("/");
@@ -76,10 +76,8 @@ export default async function BlogPage({ params }: Props) {
   );
 }
 
-// 선택사항: 정적 생성을 위한 경로 설정
 export async function generateStaticParams() {
-  // 예시: DB나 CMS에서 가져온 경로들
-  const routes = [{ slug: ["test", "test"] }, { slug: ["example", "example"] }];
-
-  return routes;
+  return allPosts.map((post) => ({
+    slug: post.slug.split("/"),
+  }));
 }
