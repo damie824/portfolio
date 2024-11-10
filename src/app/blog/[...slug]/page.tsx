@@ -4,6 +4,7 @@ import Comments from "@/components/sections/comments/comments";
 import { Mdx } from "@/components/sections/mdx/mdx-components";
 import { allPosts } from "@/contentlayer/generated";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 type Props = {
   params: {
@@ -20,7 +21,7 @@ async function getPost(slug: string) {
   return post;
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost(params.slug.join("/"));
   return {
     title: post.title + " - 규연.데브",
@@ -28,7 +29,6 @@ export async function generateMetadata({ params }: Props) {
     openGraph: {
       title: post.title + " - 규연.데브",
       description: post.description,
-      thumbnail: `https://gyuyeon.dev${post.thumbnail}`,
       type: "article",
       locale: "ko_KR",
       url: `https://gyuyeon.dev/blog/${post.slug}`,
