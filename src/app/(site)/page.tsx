@@ -1,10 +1,13 @@
 import HomeTyper from "@/components/sections/home/typer";
 import Image from "next/image";
+import Link from "next/link";
+import { allPosts, Post } from "@/contentlayer/generated";
 
 import minimo from "$/profile/minimo.png";
-import Link from "next/link";
 
 export default function Home() {
+  const posts = allPosts.slice(0, 4);
+
   return (
     <main>
       <section className="max-w-[800px] px-20 relative flex mx-auto h-[300px] p-10 overflow-hidden justify-center sm:justify-start sm:items-end">
@@ -59,6 +62,17 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="p-10 text-center">
+        <h2 className="text-3xl font-bold text-center">Recent Posts</h2>
+        <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[650px]">
+          {posts.map((post, i) => (
+            <Posts key={i} post={post} />
+          ))}
+        </div>
+        <Link href="/blog" className="text-white/50 text-sm text-center mt-5">
+          More...
+        </Link>
+      </section>
     </main>
   );
 }
@@ -74,5 +88,29 @@ function Skill({ name, percent }: { name: string; percent: number }) {
         ></div>
       </div>
     </div>
+  );
+}
+
+function Posts({ post }: { post: Post }) {
+  return (
+    <Link
+      href={"/blog/" + post.slug}
+      className="w-full rounded-md p-3 flex gap-2 py-5 flex-col bg-neutral-800/40 hover:scale-[102%] transition-transform"
+    >
+      <div className="flex gap-3 items-center">
+        <h3 className="font-bold" key={post.slug}>
+          {post.title}
+        </h3>
+        <p className="text-white/50 text-xs">
+          {new Date(post.createdAt).toLocaleDateString()}
+        </p>
+      </div>
+      <p className="text-sm text-white/50">
+        {post.body.raw.replace(/[#*`]/g, "").slice(0, 200)}
+      </p>
+      <p className="text-sm text-primary">
+        {post.category.replace(/_/g, " ").toUpperCase()}
+      </p>
+    </Link>
   );
 }

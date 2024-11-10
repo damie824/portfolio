@@ -1,4 +1,5 @@
 import Remote from "@/components/sections/blog/remote";
+import Share from "@/components/sections/blog/share";
 import Comments from "@/components/sections/comments/comments";
 import { Mdx } from "@/components/sections/mdx/mdx-components";
 import { allPosts } from "@/contentlayer/generated";
@@ -8,6 +9,7 @@ type Props = {
   params: {
     slug: string[];
   };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 async function getPost(slug: string) {
@@ -48,8 +50,13 @@ export default async function BlogPage({ params }: Props) {
 
   return (
     <main className="max-w-[900px] mx-auto relative">
-      <div className="p-10 pt-0 lg:flex lg:justify-between">
+      <div className="p-10 mb-5 pt-0 lg:flex lg:justify-between">
         <div>
+          <img
+            className="w-full mt-10 rounded-md h-32 object-cover"
+            src={post.thumbnail}
+            alt={post.title}
+          />
           <div className="mt-8 py-10">
             <p className="text-sm text-primary mb-2">{post?.category}</p>
             <h1 className="text-4xl font-bold break-keep">{post?.title}</h1>
@@ -58,10 +65,13 @@ export default async function BlogPage({ params }: Props) {
             </p>
           </div>
           <Mdx code={post?.body.code || ""} />
+          <Share />
         </div>
         <Remote raw={post?.body.raw || ""} />
       </div>
-      <Comments />
+      <div className="p-10">
+        <Comments />
+      </div>
     </main>
   );
 }
