@@ -7,9 +7,9 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
@@ -22,7 +22,7 @@ async function getPost(slug: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPost(await params.slug.join("/"));
+  const post = await getPost((await params).slug.join("/"));
   return {
     title: post.title + " - 규연.데브",
     description: post.description,
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPage({ params }: Props) {
-  const postId = await params.slug.join("/");
+  const postId = (await params).slug.join("/");
   const post = await getPost(postId);
 
   return (
