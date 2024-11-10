@@ -1,0 +1,29 @@
+{
+  "cacheItemsMap": {
+    "posts/testportfolio.mdx": {
+      "document": {
+        "title": "안녕하세요. 포트폴리오에요.",
+        "description": "안녕하세요. 미리보기 내용입니다.",
+        "createdAt": "2022-03-21T00:00:00.000Z",
+        "thumbnail": "https://via.placeholder.com/150\r",
+        "category": "카테고리1",
+        "body": {
+          "raw": "\r\n안녕하세요. 오늘은 React.js 프로젝트를 만들어볼게요.\r\n\r\n```\r\n    title: { type: \"string\", required: true },\r\n    description: { type: \"string\", required: true },\r\n    createdAt: { type: \"date\", required: true },\r\n    thumbnail: { type: \"string\", required: true },\r\n    category: { type: \"string\", required: true },\r\n```\r\n",
+          "html": "<p>안녕하세요. 오늘은 React.js 프로젝트를 만들어볼게요.</p>\n<pre><code>    title: { type: \"string\", required: true },\r\n    description: { type: \"string\", required: true },\r\n    createdAt: { type: \"date\", required: true },\r\n    thumbnail: { type: \"string\", required: true },\r\n    category: { type: \"string\", required: true },\n</code></pre>"
+        },
+        "_id": "posts/testportfolio.mdx",
+        "_raw": {
+          "sourceFilePath": "posts/testportfolio.mdx",
+          "sourceFileName": "testportfolio.mdx",
+          "sourceFileDir": "posts",
+          "contentType": "mdx",
+          "flattenedPath": "posts/testportfolio"
+        },
+        "type": "Post"
+      },
+      "documentHash": "1731237529113",
+      "hasWarnings": false,
+      "documentTypeName": "Post"
+    }
+  }
+}

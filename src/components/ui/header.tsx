@@ -51,10 +51,11 @@ export default function GlobalHeader() {
             <Link href={"/"}>
               <h1 className="font-black">Gyuyeon Lee</h1>
             </Link>
-            <div className="flex gap-4">
+            <div className="flex gap-3 text-sm">
               <Link href={"/about"}>About</Link>
               <Link href={"/blog"}>Blog</Link>
-              <Link href={"/play"}>Playground</Link>
+              <Link href={"/play"}>Portfolio</Link>
+              <Link href={"/guestbook"}>Guestbook</Link>
             </div>
           </div>
         </div>
@@ -69,7 +70,6 @@ export default function GlobalHeader() {
         style={{
           top: `${headerHeight}px`,
           width: `${scrollProgress}%`,
-          transition: "width 30ms ease-in-out",
         }}
       ></div>
     </>

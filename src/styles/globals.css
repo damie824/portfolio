@@ -7,9 +7,13 @@
   --foreground: #fafafa;
   --border: #ffffff3a;
   --primary: #f9c537;
-  --primary-foreground: #ffffff;
+  --primary-foreground: #252525;
   --card: #080808;
   --card-foreground: #ffffff;
+}
+
+*::selection {
+  background: #f9c53721;
 }
 
 body {

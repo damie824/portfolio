@@ -10,12 +10,13 @@ export default function AboutPage() {
         <h1 className="0 text-3xl font-bold">이규연 | Damie Lee</h1>
         <div className="flex justify-around mt-16">
           <Image
-            className="w-56 h-56 object-cover rounded-full border"
+            className="w-56 h-56 mx-8 object-cover rounded-full border hidden md:block"
             src={profileImg}
             alt="profile"
           />
-          <div>
+          <div className="flex-1">
             <h4 className="text-xl text-primary mb-3">Information</h4>
+            <div className="w-full h-[1px] bg-border my-3"></div>
             <ul>
               <li className="flex gap-5 items-center">
                 <svg
@@ -53,6 +54,7 @@ export default function AboutPage() {
               </li>
             </ul>
             <h4 className="text-xl text-primary mb-3 mt-4">Contact</h4>
+            <div className="w-full h-[1px] bg-border my-3"></div>
             <ul>
               <li className="flex gap-5 items-center">
                 <svg
@@ -69,7 +71,7 @@ export default function AboutPage() {
                     d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
                   />
                 </svg>
-                <Link href={"mailTo:admin@gyuyeon.dev"}>admin@gyuyoen.dev</Link>
+                <Link href={"mailTo:lee@gyuyeon.dev"}>lee@gyuyoen.dev</Link>
               </li>
               <li className="flex gap-5 items-center">
                 <svg
@@ -86,7 +88,7 @@ export default function AboutPage() {
                     d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
                   />
                 </svg>
-                <Link href={"TEL:010-4055-1202"}>010-4055-1202</Link>
+                <Link href={"tel:010-4055-1202"}>010-4055-1202</Link>
               </li>
             </ul>
           </div>
@@ -114,244 +116,60 @@ export default function AboutPage() {
         <div className="w-full h-[1px] bg-border my-3"></div>
         <ProjectList>
           <ProjectList.Item date="2024.08 - Now">
-            <div>
-              <div className="flex gap-3 items-center">
-                <p className="font-bold">Gyuyeon Portfolio</p>
-                <Link
-                  className="text-sm flex items-center gap-1 text-border"
-                  href={"/"}
-                >
-                  Link
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                    />
-                  </svg>
-                </Link>
-              </div>
-              <p className="text-sm text-border">
-                포트폴리오 리브랜딩 프로젝트입니다.
-              </p>
-            </div>
+            <PortfolioItem
+              title="Gyuyeon Portfolio"
+              desc="포트폴리오 리브랜딩 프로젝트입니다."
+              href="/"
+            />
           </ProjectList.Item>
           <ProjectList.Item date="2024.08 - Now">
-            <div>
-              <div className="flex gap-3 items-center">
-                <p className="font-bold">Crow Project</p>
-                <Link
-                  className="text-sm flex items-center gap-1 text-border"
-                  href={"https://github.com/crow-browser"}
-                >
-                  Link
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                    />
-                  </svg>
-                </Link>
-              </div>
-              <p className="text-sm text-border">
-                파이어폭스 기반 브라우저 개발 프로젝트입니다.
-              </p>
-            </div>
+            <PortfolioItem
+              title="Crow Project"
+              desc="파이어폭스 기반 브라우저 개발 프로젝트입니다."
+              href="https://github.com/crow-browser"
+            />
           </ProjectList.Item>
           <ProjectList.Item date="2024.06 - 2024.07">
-            <div>
-              <div className="flex gap-3 items-center">
-                <p className="font-bold">Damie Labs v3</p>
-                <Link
-                  className="text-sm flex items-center gap-1 text-border"
-                  href={"https://v3.gyuyeon.dev/"}
-                >
-                  Link
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                    />
-                  </svg>
-                </Link>
-              </div>
-              <p className="text-sm text-border">
-                두 번째 포트폴리오 웹사이트 프로젝트입니다.
-              </p>
-            </div>
+            <PortfolioItem
+              title="Damie Labs v2"
+              desc="두 번째 포트폴리오 웹사이트 프로젝트입니다."
+              href="https://v2.gyuyeon.dev/"
+            />
           </ProjectList.Item>
           <ProjectList.Item date="2023.12 - 2024.06">
-            <div>
-              <div className="flex gap-3 items-center">
-                <p className="font-bold">Odinus Project</p>
-                <Link
-                  className="text-sm flex items-center gap-1 text-border"
-                  href={"https://odinus.shop"}
-                >
-                  Link
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                    />
-                  </svg>
-                </Link>
-              </div>
-              <p className="text-sm text-border">
-                인디 게이밍 런처 개발 프로젝트입니다.
-              </p>
-            </div>
+            <PortfolioItem
+              title="Odinus Project"
+              desc="인디 게이밍 런처 개발 프로젝트입니다."
+              href="https://odinus.shop"
+            />
           </ProjectList.Item>
           <ProjectList.Item date="2024.03 - 2024.05">
-            <div>
-              <div className="flex gap-3 items-center">
-                <p className="font-bold">Onboxing</p>
-                <Link
-                  className="text-sm flex items-center gap-1 text-border"
-                  href={"https://github.com/damie824/onboxing-client"}
-                >
-                  Link
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                    />
-                  </svg>
-                </Link>
-              </div>
-              <p className="text-sm text-border">
-                탄소 배출 절감을 위한 공유 배송 서비스입니다.
-              </p>
-            </div>
+            <PortfolioItem
+              title="Onboxing"
+              desc="탄소 배출 절감을 위한 공유 배송 서비스입니다."
+              href="https://github.com/damie824/onboxing-client"
+            />
           </ProjectList.Item>
           <ProjectList.Item date="2023.11 - 2023.12">
-            <div>
-              <div className="flex gap-3 items-center">
-                <p className="font-bold">DPUS</p>
-                <Link
-                  className="text-sm flex items-center gap-1 text-border"
-                  href={"https://github.com/damie824/dpus-frontend"}
-                >
-                  Link
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                    />
-                  </svg>
-                </Link>
-              </div>
-              <p className="text-sm text-border">
-                대평고 학생들을 위한 커뮤니티 사이트입니다.
-              </p>
-            </div>
+            <PortfolioItem
+              title="DPUS"
+              desc="대평고 학생들을 위한 커뮤니티 사이트입니다."
+              href="https://github.com/damie824/dpus-frontend"
+            />
           </ProjectList.Item>
           <ProjectList.Item date="2023.10 - 2023.10">
-            <div>
-              <div className="flex gap-3 items-center">
-                <p className="font-bold">Dphs Adviser</p>
-                <Link
-                  className="text-sm flex items-center gap-1 text-border"
-                  href={"https://github.com/damie824/dphs-adviser-app"}
-                >
-                  Link
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                    />
-                  </svg>
-                </Link>
-              </div>
-              <p className="text-sm text-border">
-                학교의 급식, 시간표 등을 전달하는 어플리케이션입니다.
-              </p>
-            </div>
+            <PortfolioItem
+              title="Dphs Adviser"
+              desc="학교의 급식, 시간표 등을 전달하는 어플리케이션입니다."
+              href="https://github.com/damie824/dphs-adviser-app"
+            />
           </ProjectList.Item>
           <ProjectList.Item date="2023.10 - 2023.10">
-            <div>
-              <div className="flex gap-3 items-center">
-                <p className="font-bold">Damie Labs v1</p>
-                <Link
-                  className="text-sm flex items-center gap-1 text-border"
-                  href={"https://github.com/damie824/damie-works"}
-                >
-                  Link
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-3"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                    />
-                  </svg>
-                </Link>
-              </div>
-              <p className="text-sm text-border">
-                첫 포트폴리오 웹사이트 프로젝트입니다.
-              </p>
-            </div>
+            <PortfolioItem
+              title="Damie Labs v1"
+              desc="첫 포트폴리오 웹사이트 프로젝트입니다."
+              href="https://v1.gyuyeon.dev/"
+            />
           </ProjectList.Item>
         </ProjectList>
       </section>
@@ -377,7 +195,7 @@ function ProjectList({
   children?: ReactElement<typeof ProjectList.Item>[];
 }) {
   return (
-    <div className="relative border-l-border border-l-2 mx-5 my-5">
+    <div className="relative md:border-l-border md:border-l-2 md:mx-5 my-5">
       {children}
     </div>
   );
@@ -391,14 +209,53 @@ ProjectList.Item = ({
   children?: ReactElement;
 }) => {
   return (
-    <div className="flex py-4 px-5 items-center">
-      <div className="w-3 h-3 border-2 border-border rounded-full absolute left-[-7px] bg-background"></div>
-      <div className="flex mt-[-2px] items-center">
-        <div className="w-44 text-border">
+    <div className="flex py-4 md:px-5 items-center">
+      <div className="w-3 h-3 border-2 border-border rounded-full absolute left-[-7px] bg-background hidden md:block"></div>
+      <div className="flex mt-[-2px] flex-col md:flex-row md:items-center">
+        <div className="w-44 text-border text-xs mb-1 md:mb-0 md:text-base">
           <p>{date}</p>
         </div>
-        <div className="w-52 md:w-auto">{children}</div>
+        <div>{children}</div>
       </div>
     </div>
   );
 };
+
+function PortfolioItem({
+  title,
+  desc,
+  href,
+}: {
+  title: string;
+  desc: string;
+  href: string;
+}) {
+  return (
+    <div>
+      <div className="flex gap-3 items-center">
+        <p className="font-bold">{title}</p>
+        <Link
+          className="text-sm flex items-center gap-1 text-border"
+          href={href}
+        >
+          Link
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-3"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
+            />
+          </svg>
+        </Link>
+      </div>
+      <p className="text-border text-xs md:text-sm">{desc}</p>
+    </div>
+  );
+}

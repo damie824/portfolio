@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 
 export default function Comments() {
@@ -11,13 +13,12 @@ export default function Comments() {
     script.setAttribute("data-mapping", "pathname");
     script.setAttribute("data-strict", "0");
     script.setAttribute("data-reactions-enabled", "1");
-    script.setAttribute("data-emit-metadata", "0");
-    script.setAttribute("data-input-position", "bottom");
+    script.setAttribute("data-emit-metadata", "1");
+    script.setAttribute("data-input-position", "top");
     script.setAttribute("data-theme", "https://gyuyeon.dev/css/comments.css");
     script.setAttribute("data-lang", "ko");
     script.setAttribute("crossorigin", "anonymous");
     script.async = true;
-
     document.getElementById("comments-container")?.appendChild(script);
   }, []);
 

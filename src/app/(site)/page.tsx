@@ -2,27 +2,77 @@ import HomeTyper from "@/components/sections/home/typer";
 import Image from "next/image";
 
 import minimo from "$/profile/minimo.png";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <main>
-      <section className="max-w-[800px] relative flex mx-auto p-10 overflow-hidden">
-        <div className="flex flex-col gap-10 items-center sm:items-start">
+      <section className="max-w-[800px] px-20 relative flex mx-auto h-[300px] p-10 overflow-hidden justify-center sm:justify-start sm:items-end">
+        <div className="flex flex-col gap-5 items-center sm:items-start">
           <div className="text-3xl flex flex-col items-center sm:items-start sm:text-4xl font-bold">
+            <p className="text-sm mb-2 font-normal text-white/50">
+              gyuyeon.dev
+            </p>
             <h2>안녕하세요,</h2>
             <HomeTyper />
             <h2>이규연입니다.</h2>
           </div>
-          <div className="flex"></div>
+          <div className="flex gap-1">
+            <Link
+              href="/about"
+              className="bg-primary text-primary-foreground px-3 py-1 rounded-md text-sm hover:opacity-80 transition-opacity"
+            >
+              About
+            </Link>
+            <Link
+              href="/profile"
+              className="border-border border px-3 py-1 rounded-md text-sm hover:bg-border transition-colors"
+            >
+              Contact
+            </Link>
+          </div>
         </div>
-        <div className="w-40 h-40">
-          <Image
-            src={minimo}
-            alt="minimo"
-            className="w-56 h-56 absolute bottom-[-40px] right-24"
-          />
+        <Image
+          src={minimo}
+          alt="minimo"
+          className="w-[400px] h-[400px] absolute bottom-[-150px] right-[0px] hidden sm:block"
+        />
+      </section>
+      <section
+        className="bg-neutral-950"
+        style={{
+          clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
+        }}
+      >
+        <div className="max-w-[650px] mx-auto p-10 pb-16">
+          <h3 className="text-3xl font-bold">Main Skills</h3>
+          <p className="text-sm text-white/50 mt-2">
+            제가 가장 잘 다루는 기술들을 소개해드릴게요!
+          </p>
+          <div className="flex gap-3 flex-col my-5">
+            <Skill name="React" percent={90} />
+            <Skill name="Next.js" percent={87} />
+            <Skill name="Typescript" percent={80} />
+            <Skill name="Rust" percent={71} />
+            <Skill name="Unity" percent={52} />
+            <Skill name="C#" percent={48} />
+          </div>
         </div>
       </section>
     </main>
+  );
+}
+
+function Skill({ name, percent }: { name: string; percent: number }) {
+  return (
+    <div className="flex gap-2 w-full flex-col sm:flex-row sm:items-center">
+      <p className="text-sm w-32">{name}</p>
+      <div className="w-full h-[5px] bg-neutral-800 rounded-full">
+        <div
+          className="h-[5px] bg-primary rounded-full"
+          style={{ width: `${percent}%` }}
+        ></div>
+      </div>
+    </div>
   );
 }
