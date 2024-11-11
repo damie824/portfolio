@@ -238,7 +238,7 @@ const components = {
     return <li {...props} />;
   },
   img: ({ ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <img className={"rounded-md"} {...props} />
+    <img className={"rounded-md max-w-[500px]"} {...props} />
   ),
   p: ({ ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <p className={"my-5"} {...props} />
