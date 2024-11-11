@@ -1,4 +1,26 @@
 import { allPortfolios } from "@/contentlayer/generated";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "포트폴리오 - 규연.데브",
+  description:
+    "포트폴리오 페이지입니다. 제가 지금까지 제작한 여러 프로젝트들과 코드들을 만나보세요.",
+  openGraph: {
+    title: "포트폴리오 - 규연.데브",
+    description:
+      "포트폴리오 페이지입니다. 제가 지금까지 제작한 여러 프로젝트들과 코드들을 만나보세요.",
+    type: "website",
+    locale: "ko_KR",
+    url: "https://gyuyeon.dev/blog",
+  },
+  twitter: {
+    card: "summary",
+    title: "포트폴리오 - 규연.데브",
+    description:
+      "포트폴리오 페이지입니다. 제가 지금까지 제작한 여러 프로젝트들과 코드들을 만나보세요.",
+    creator: "@damie824",
+  },
+};
 
 export default function Portfolio() {
   const portfolios = allPortfolios;

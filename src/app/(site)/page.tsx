@@ -4,6 +4,28 @@ import Link from "next/link";
 import { allPosts, Post } from "@/contentlayer/generated";
 
 import minimo from "$/profile/minimo.png";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "규연.데브",
+  description:
+    "창의적이고 혁신적인 개발자, 이규연의 포트폴리오에 오신 것을 환영합니다. 다양한 프로젝트와 기술을 통해 창의성을 발휘하며, 끊임없이 새로운 도전을 추구합니다.",
+  openGraph: {
+    title: "규연.데브",
+    description:
+      "창의적이고 혁신적인 개발자, 이규연의 포트폴리오에 오신 것을 환영합니다. 다양한 프로젝트와 기술을 통해 창의성을 발휘하며, 끊임없이 새로운 도전을 추구합니다.",
+    type: "website",
+    locale: "ko_KR",
+    url: "https://gyuyeon.dev/blog",
+  },
+  twitter: {
+    card: "summary",
+    title: "규연.데브",
+    description:
+      "창의적이고 혁신적인 개발자, 이규연의 포트폴리오에 오신 것을 환영합니다. 다양한 프로젝트와 기술을 통해 창의성을 발휘하며, 끊임없이 새로운 도전을 추구합니다.",
+    creator: "@damie824",
+  },
+};
 
 export default function Home() {
   const posts = allPosts.sort(
