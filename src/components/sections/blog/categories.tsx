@@ -2,7 +2,6 @@
 
 import { Post } from "@/contentlayer/generated";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Categories({ posts }: { posts: Post[] }) {
@@ -12,8 +11,6 @@ export default function Categories({ posts }: { posts: Post[] }) {
     new Set(posts.flatMap((post) => post.category))
   );
   const postsPerPage = 10;
-  const searchParams = useSearchParams();
-  const initialCategory: string | null = searchParams.get("category");
 
   const onCategoryButtonClick = (category: string | null): void => {
     setCategory(category);
@@ -30,6 +27,10 @@ export default function Categories({ posts }: { posts: Post[] }) {
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
   useEffect(() => {
+    const initialCategory: string | null =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("category")
+        : null;
     if (categories.includes(initialCategory || "undefined")) {
       setCategory(initialCategory);
     }
