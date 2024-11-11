@@ -6,11 +6,13 @@ import { allPosts, Post } from "@/contentlayer/generated";
 import minimo from "$/profile/minimo.png";
 
 export default function Home() {
-  const posts = allPosts.slice(0, 4);
+  const posts = allPosts.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
 
   return (
     <main>
-      <section className="max-w-[800px] px-20 relative flex mx-auto h-[300px] p-10 overflow-hidden justify-center sm:justify-start sm:items-end">
+      <section className="max-w-[800px] sm:px-20 relative flex mx-auto h-[300px] py-10 overflow-hidden justify-center sm:justify-start sm:items-end">
         <div className="flex flex-col gap-5 items-center sm:items-start">
           <div className="text-3xl flex flex-col items-center sm:items-start sm:text-4xl font-bold">
             <p className="text-sm mb-2 font-normal text-white/50">
@@ -65,7 +67,7 @@ export default function Home() {
       <section className="p-10 text-center">
         <h2 className="text-3xl font-bold text-center">Recent Posts</h2>
         <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[650px]">
-          {posts.map((post, i) => (
+          {posts.slice(0, 2).map((post, i) => (
             <Posts key={i} post={post} />
           ))}
         </div>
@@ -106,10 +108,14 @@ function Posts({ post }: { post: Post }) {
         </p>
       </div>
       <p className="text-sm text-white/50">
-        {post.body.raw.replace(/[#*`]/g, "").slice(0, 200)}
+        {post.body.raw.replace(/[#*`]/g, "").slice(0, 200)}...
       </p>
       <p className="text-sm text-primary">
-        {post.category.replace(/_/g, " ").toUpperCase()}
+        {post.category
+          .map((cat) => `#${cat}`)
+          .join(" ")
+          .replace(/_/g, " ")
+          .toUpperCase()}
       </p>
     </Link>
   );

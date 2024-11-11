@@ -1,11 +1,31 @@
 import profileImg from "$/profile/profile.jpeg";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactElement } from "react";
 
+export const metadata: Metadata = {
+  title: "어바웃 - 규연.데브",
+  description: "개발자로서의 경험을 꾹꾹 눌러담은 글들을 모아봤어요.",
+  openGraph: {
+    title: "블로그 - 규연.데브",
+    description: "개발자로서의 경험을 꾹꾹 눌러담은 글들을 모아봤어요.",
+    type: "website",
+    locale: "ko_KR",
+    url: "https://gyuyeon.dev/blog",
+  },
+  twitter: {
+    card: "summary",
+    title: "블로그 - 규연.데브",
+    description: "개발자로서의 경험을 꾹꾹 눌러담은 글들을 모아봤어요.",
+    creator: "@damie824",
+  },
+};
+
+
 export default function AboutPage() {
   return (
-    <main className="max-w-[900px] mx-auto p-20">
+    <main className="max-w-[900px] mx-auto pt-20 p-5 md:p-20">
       <section>
         <h1 className="0 text-3xl font-bold">이규연 | Damie Lee</h1>
         <div className="flex justify-around mt-16">

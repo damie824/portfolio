@@ -17,6 +17,8 @@ export type Portfolio = {
   description: string
   createdAt: IsoDateTimeString
   thumbnail: string
+  url: any
+  tags?: string[] | undefined
   /** MDX file body */
   body: MDX
   slug: string
@@ -31,7 +33,7 @@ export type Post = {
   description: string
   createdAt: IsoDateTimeString
   thumbnail: string
-  category: string
+  category: string[]
   /** MDX file body */
   body: MDX
   slug: string

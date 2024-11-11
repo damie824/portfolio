@@ -1,12 +1,14 @@
 "use client";
 
-export default function Share() {
+export default function Share({ title }: { title: string }) {
   return (
     <div className="flex w-full">
       <button
         onClick={async () => {
           try {
-            await navigator.clipboard.writeText(window.location.href);
+            await navigator.clipboard.writeText(
+              `${title} - 규연.데브\n\n${window.location.href}`
+            );
 
             // 토스트 메시지 엘리먼트 생성
             const toast = document.createElement("div");

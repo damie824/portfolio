@@ -47,15 +47,21 @@ export default function GlobalHeader() {
         ref={headerRef}
       >
         <div className="max-w-[800px] mx-auto p-5">
-          <div className="flex uppercase justify-between">
+          <div className="flex uppercase justify-between items-center">
             <Link href={"/"}>
-              <h1 className="font-black">Gyuyeon Lee</h1>
+              <h1 className="font-black flex">
+                G<span className="hidden sm:block">yu</span>y
+                <span className="hidden sm:block mr-2">eon</span>L
+                <span className="hidden sm:block">ee</span>
+              </h1>
             </Link>
-            <div className="flex gap-3 text-sm">
+            <div className="flex gap-3 text-xs sm:text-sm">
               <Link href={"/about"}>About</Link>
               <Link href={"/blog"}>Blog</Link>
-              <Link href={"/play"}>Portfolio</Link>
-              <Link href={"/guestbook"}>Guestbook</Link>
+              <Link href={"/portfolio"}>Portfolio</Link>
+              <Link className="hidden sm:block" href={"/guestbook"}>
+                Guestbook
+              </Link>
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ export default function HomeTyper() {
             3000,
             "웹사이트",
             3000,
-            "어플리케이션",
+            "애플리케이션",
             3000,
             ".net",
             3000,

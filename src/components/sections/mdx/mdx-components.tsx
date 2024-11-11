@@ -184,7 +184,7 @@ const components = {
     ...props
   }: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className="mt-6 bg-neutral-800/20 flex gap-5 flex-wrap rounded-md h-fit overflow-hidden"
+      className="mt-6 bg-neutral-800/20 flex gap-5 flex-wrap h-fit overflow-hidden"
       {...props}
     >
       <div className="w-1 h-auto bg-primary self-stretch"></div>
@@ -240,6 +240,9 @@ const components = {
   img: ({ ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <img className={"rounded-md"} {...props} />
   ),
+  p: ({ ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    <p className={"my-5"} {...props} />
+  ),
 };
 
 interface MdxProps {
@@ -250,7 +253,7 @@ export function Mdx({ code }: MdxProps) {
   const Component = useMDXComponent(code);
 
   return (
-    <div className="break-keep">
+    <div className="break-keep mb-10">
       <Component components={components} />
     </div>
   );

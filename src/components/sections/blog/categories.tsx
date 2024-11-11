@@ -2,27 +2,38 @@
 
 import { Post } from "@/contentlayer/generated";
 import Link from "next/link";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Categories({ posts }: { posts: Post[] }) {
   const [category, setCategory] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const categories = Array.from(new Set(posts.map((post) => post.category)));
+  const categories = Array.from(
+    new Set(posts.flatMap((post) => post.category))
+  );
   const postsPerPage = 10;
+  const searchParams = useSearchParams();
+  const initialCategory: string | null = searchParams.get("category");
 
-  const onCategoryButtonClick = (category: string | null) => {
+  const onCategoryButtonClick = (category: string | null): void => {
     setCategory(category);
     setCurrentPage(1);
   };
 
   const filteredPosts = posts.filter(
-    (post) => !category || post.category === category
+    (post) => !category || post.category.includes(category)
   );
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+  useEffect(() => {
+    if (categories.includes(initialCategory || "undefined")) {
+      setCategory(initialCategory);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col gap-3">
@@ -37,14 +48,17 @@ export default function Categories({ posts }: { posts: Post[] }) {
             onClick={() => onCategoryButtonClick(null)}
             isActive={category === null}
           />
-          {categories.map((item) => (
-            <CategoryItem
-              key={item}
-              item={item}
-              onClick={() => onCategoryButtonClick(item)}
-              isActive={category === item}
-            />
-          ))}
+          {categories
+            .sort()
+            .flat()
+            .map((item) => (
+              <CategoryItem
+                key={item}
+                item={item}
+                onClick={() => onCategoryButtonClick(item)}
+                isActive={category?.includes(item) || false}
+              />
+            ))}
         </div>
         <div className="flex flex-col gap-3 w-full">
           <div className="bg-yellow-300/10 items-center w-full rounded-md p-3 flex gap-3 border-yellow-500/20 border">
@@ -55,9 +69,15 @@ export default function Categories({ posts }: { posts: Post[] }) {
               개발, 일상 등 여러 분야의 글들을 올릴 예정이니 재밌게 읽어주세요!
             </p>
           </div>
-          {currentPosts.map((post) => (
-            <CategoryPosts key={post.slug} post={post} />
-          ))}
+          {currentPosts
+            .sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+            .map((post) => (
+              <CategoryPosts key={post.slug} post={post} />
+            ))}
           {totalPages > 1 && (
             <div className="flex justify-center gap-2 mt-4">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(
@@ -121,10 +141,14 @@ function CategoryPosts({ post }: { post: Post }) {
         </p>
       </div>
       <p className="text-sm text-white/50">
-        {post.body.raw.replace(/[#*`]/g, "").slice(0, 200)}
+        {post.body.raw.replace(/[#*`]/g, "").slice(0, 200)}...
       </p>
       <p className="text-sm text-primary">
-        {post.category.replace(/_/g, " ").toUpperCase()}
+        {post.category
+          .map((cat) => `#${cat}`)
+          .join(" ")
+          .replace(/_/g, " ")
+          .toUpperCase()}
       </p>
     </Link>
   );

@@ -5,6 +5,7 @@ import { Mdx } from "@/components/sections/mdx/mdx-components";
 import { allPosts } from "@/contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import Link from "next/link";
 
 type Props = {
   params: Promise<{
@@ -49,22 +50,30 @@ export default async function BlogPage({ params }: Props) {
 
   return (
     <main className="max-w-[900px] mx-auto relative">
-      <div className="p-10 mb-5 pt-0 lg:flex lg:justify-between">
-        <div>
+      <div className="md:p-10 px-3 py-10 mb-5 pt-0 lg:flex lg:justify-between">
+        <div className="w-full lg:w-[650px]">
           <img
             className="w-full mt-10 rounded-md h-32 object-cover"
             src={post.thumbnail}
             alt={post.title}
           />
           <div className="mt-8 py-10">
-            <p className="text-sm text-primary mb-2">{post?.category}</p>
+            <div className="text-sm text-primary mb-2 flex gap-3">
+              {post?.category.map((category, index) => {
+                return (
+                  <Link key={index} href={`/blog?category=${category}`}>
+                    {category}
+                  </Link>
+                );
+              })}
+            </div>
             <h1 className="text-4xl font-bold break-keep">{post?.title}</h1>
-            <p className="text-sm text-gray-500 mt-8">
-              {new Date(post.createdAt).toLocaleDateString()}
+            <p className="text-sm text-gray-500 mt-2">
+              Gyuyeon Lee - {new Date(post.createdAt).toLocaleDateString()}
             </p>
           </div>
           <Mdx code={post?.body.code || ""} />
-          <Share />
+          <Share title={post?.title || ""} />
         </div>
         <Remote raw={post?.body.raw || ""} />
       </div>
