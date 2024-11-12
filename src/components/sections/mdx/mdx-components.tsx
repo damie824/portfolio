@@ -184,11 +184,11 @@ const components = {
     ...props
   }: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className="mt-6 bg-neutral-800/20 flex gap-5 flex-wrap h-fit overflow-hidden"
+      className="mt-6 bg-neutral-800/20 flex gap-5 flex-wrap h-fit overflow-hidden relative"
       {...props}
     >
-      <div className="w-1 h-auto bg-primary self-stretch"></div>
-      <div className="text-sm py-3 h-fit">{props.children}</div>
+      <div className="w-1 h-full bg-primary self-stretch absolute left-0"></div>
+      <div className="text-sm py-3 h-fit ml-5">{props.children}</div>
     </blockquote>
   ),
   hr: () => <hr className="w-full h-[1px] border-white/20 my-2"></hr>,
@@ -238,7 +238,7 @@ const components = {
     return <li {...props} />;
   },
   img: ({ ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <img className={"rounded-md max-w-[500px]"} {...props} />
+    <img className={"rounded-md md:max-w-[500px]"} {...props} />
   ),
   p: ({ ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <p className={"my-5"} {...props} />
