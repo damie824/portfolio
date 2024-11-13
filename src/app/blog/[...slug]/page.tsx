@@ -77,7 +77,7 @@ export default async function BlogPage({ params }: Props) {
         </div>
         <Remote raw={post?.body.raw || ""} />
       </div>
-      <div className="p-10">
+      <div className="p-3 md:p-10">
         <Comments />
       </div>
     </main>
