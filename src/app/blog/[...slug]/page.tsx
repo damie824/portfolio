@@ -22,66 +22,82 @@ async function getPost(slug: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPost((await params).slug.join("/"));
-  return {
-    title: post.title + " - 규연.데브",
-    description: post.description,
-    openGraph: {
+  try {
+    const post = await getPost((await params).slug.join("/"));
+    return {
       title: post.title + " - 규연.데브",
       description: post.description,
-      type: "article",
-      locale: "ko_KR",
-      url: `https://gyuyeon.dev/blog/${post.slug}`,
-      images: [`https://gyuyeon.dev${post.thumbnail}`],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title + " - 규연.데브",
-      description: post.description,
-      images: [`https://gyuyeon.dev${post.thumbnail}`],
-      creator: "@damie824",
-    },
-  };
+      openGraph: {
+        title: post.title + " - 규연.데브",
+        description: post.description,
+        type: "article",
+        locale: "ko_KR",
+        url: `https://gyuyeon.dev/blog/${post.slug}`,
+        images: post.thumbnail ? [`https://gyuyeon.dev${post.thumbnail}`] : [],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title + " - 규연.데브",
+        description: post.description,
+        images: post.thumbnail ? [`https://gyuyeon.dev${post.thumbnail}`] : [],
+        creator: "@damie824",
+      },
+    };
+  } catch (error) {
+    console.error("Metadata generation error:", error);
+    return {
+      title: "규연.데브",
+    };
+  }
 }
 
 export default async function BlogPage({ params }: Props) {
-  const postId = (await params).slug.join("/");
-  const post = await getPost(postId);
+  try {
+    const postId = (await params).slug.join("/");
+    const post = await getPost(postId);
 
-  return (
-    <main className="max-w-[900px] mx-auto relative">
-      <div className="md:p-10 px-3 py-10 mb-5 pt-0 lg:flex lg:justify-between">
-        <div className="w-full lg:w-[650px]">
-          <img
-            className="w-full mt-10 rounded-md h-32 object-cover"
-            src={post.thumbnail}
-            alt={post.title}
-          />
-          <div className="mt-8 py-10">
-            <div className="text-sm text-primary mb-2 flex gap-3">
-              {post?.category.map((category, index) => {
-                return (
-                  <Link key={index} href={`/blog?category=${category}`}>
-                    {category}
-                  </Link>
-                );
-              })}
+    if (!post) {
+      notFound();
+    }
+
+    return (
+      <main className="max-w-[900px] mx-auto relative">
+        <div className="md:p-10 px-3 py-10 mb-5 pt-0 lg:flex lg:justify-between">
+          <div className="w-full lg:w-[650px]">
+            <img
+              className="w-full mt-10 rounded-md h-32 object-cover"
+              src={post.thumbnail}
+              alt={post.title}
+            />
+            <div className="mt-8 py-10">
+              <div className="text-sm text-primary mb-2 flex gap-3">
+                {post?.category.map((category, index) => {
+                  return (
+                    <Link key={index} href={`/blog?category=${category}`}>
+                      {category}
+                    </Link>
+                  );
+                })}
+              </div>
+              <h1 className="text-4xl font-bold break-keep">{post?.title}</h1>
+              <p className="text-sm text-gray-500 mt-2">
+                Gyuyeon Lee - {new Date(post.createdAt).toLocaleDateString()}
+              </p>
             </div>
-            <h1 className="text-4xl font-bold break-keep">{post?.title}</h1>
-            <p className="text-sm text-gray-500 mt-2">
-              Gyuyeon Lee - {new Date(post.createdAt).toLocaleDateString()}
-            </p>
+            <Mdx code={post?.body.code || ""} />
+            <Share title={post?.title || ""} />
           </div>
-          <Mdx code={post?.body.code || ""} />
-          <Share title={post?.title || ""} />
+          <Remote raw={post?.body.raw || ""} />
         </div>
-        <Remote raw={post?.body.raw || ""} />
-      </div>
-      <div className="p-3 md:p-10">
-        <Comments />
-      </div>
-    </main>
-  );
+        <div className="p-3 md:p-10">
+          <Comments />
+        </div>
+      </main>
+    );
+  } catch (error) {
+    console.error("Blog page render error:", error);
+    notFound();
+  }
 }
 
 export async function generateStaticParams() {
