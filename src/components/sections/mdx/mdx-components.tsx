@@ -2,6 +2,7 @@
 
 import { useMDXComponent } from "next-contentlayer/hooks";
 import * as React from "react";
+import Examples from "../blog/examples";
 
 const components = {
   h1: ({
@@ -243,6 +244,7 @@ const components = {
   p: ({ ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <p className={"my-5"} {...props} />
   ),
+  Examples: ({ id }: { id: string }) => <Examples id={id} />,
 };
 
 interface MdxProps {
