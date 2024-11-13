@@ -22,7 +22,7 @@ export default function Examples({ id }: { id: string }) {
           <br />
           Source code is available on{" "}
           <Link
-            href={`https://github.com/damie824/portfolio/tree/main/src/components/sections/blog/examples/${id}`}
+            href={`https://github.com/damie824/portfolio/tree/main/src/components/sections/blog/examples/${id}.tsx`}
             className="underline"
             target="_blank"
           >
