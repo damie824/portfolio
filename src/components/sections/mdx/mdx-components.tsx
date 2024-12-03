@@ -119,61 +119,74 @@ const components = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <code className="rounded-md" {...props} />
   ),
-  pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre className="relative my-4 overflow-x-auto rounded-lg bg-neutral-900 p-4 font-mono text-sm leading-[1.5] [color-scheme:dark]">
-      <div className="absolute right-4 top-4 flex items-center space-x-2">
-        <button
-          className="hover:bg-white/20 rounded p-2 transition-colors"
-          onClick={() => {
-            // pre 엘리먼트 내의 실제 코드 텍스트를 가져옵니다
-            const preElement = document.querySelector("pre");
-            const codeElement = preElement?.querySelector("code");
-            const code = codeElement?.textContent || "";
+  pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
+    const id = Date.now();
 
-            // 코드를 클립보드에 복사합니다
-            navigator.clipboard.writeText(code);
+    return (
+      <pre
+        id={`${id}`}
+        className="relative my-4 overflow-x-auto rounded-lg bg-neutral-900 p-4 font-mono text-sm leading-[1.5] [color-scheme:dark]"
+      >
+        <div className="absolute right-4 top-4 flex items-center space-x-2">
+          <button
+            className="hover:bg-white/20 rounded p-2 transition-colors"
+            onClick={() => {
+              // pre 엘리먼트 내의 실제 코드 텍스트를 가져옵니다
+              const preElement = document.getElementById(`${id}`);
+              const codeElement = preElement?.querySelector("code");
+              const code = codeElement?.textContent || "";
 
-            // 토스트 메시지 엘리먼트 생성
-            const toast = document.createElement("div");
-            toast.className =
-              "fixed bottom-[-100px] right-4 bg-primary text-primary-foreground px-4 py-2 rounded-md shadow-lg transition-all duration-300";
-            toast.textContent = "코드가 복사되었습니다!";
+              const watermark = `
 
-            // 토스트를 추가한 직후 애니메이션을 위해 약간의 지연
-            setTimeout(() => {
-              toast.style.bottom = "1rem";
-            }, 100);
+This code is from https://gyuyeon.dev.`;
 
-            // 토스트 메시지를 body에 추가
-            document.body.appendChild(toast);
+              console.log(code + watermark);
 
-            // 3초 후 토스트 메시지 제거
-            setTimeout(() => {
-              toast.style.opacity = "0";
+              // 코드를 클립보드에 복사합니다
+              navigator.clipboard.writeText(code + watermark);
+
+              // 토스트 메시지 엘리먼트 생성
+              const toast = document.createElement("div");
+              toast.className =
+                "fixed bottom-[-100px] right-4 bg-primary text-primary-foreground px-4 py-2 rounded-md shadow-lg transition-all duration-300";
+              toast.textContent = "코드가 복사되었습니다!";
+
+              // 토스트를 추가한 직후 애니메이션을 위해 약간의 지연
               setTimeout(() => {
-                document.body.removeChild(toast);
-              }, 300);
-            }, 3000);
-          }}
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+                toast.style.bottom = "1rem";
+              }, 100);
+
+              // 토스트 메시지를 body에 추가
+              document.body.appendChild(toast);
+
+              // 3초 후 토스트 메시지 제거
+              setTimeout(() => {
+                toast.style.opacity = "0";
+                setTimeout(() => {
+                  document.body.removeChild(toast);
+                }, 300);
+              }, 3000);
+            }}
           >
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-          </svg>
-        </button>
-      </div>
-      {props.children}
-    </pre>
-  ),
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+          </button>
+        </div>
+        {props.children}
+      </pre>
+    );
+  },
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol className="ml-6 list-decimal marker:text-neutral-500" {...props} />
   ),

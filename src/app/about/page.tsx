@@ -22,7 +22,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function AboutPage() {
   return (
     <main className="max-w-[900px] mx-auto pt-20 p-5 md:p-20">
@@ -142,13 +141,6 @@ export default function AboutPage() {
               href="/"
             />
           </ProjectList.Item>
-          <ProjectList.Item date="2024.08 - Now">
-            <PortfolioItem
-              title="Crow Project"
-              desc="파이어폭스 기반 브라우저 개발 프로젝트입니다."
-              href="https://github.com/crow-browser"
-            />
-          </ProjectList.Item>
           <ProjectList.Item date="2024.06 - 2024.07">
             <PortfolioItem
               title="Damie Labs v2"
@@ -156,18 +148,11 @@ export default function AboutPage() {
               href="https://v2.gyuyeon.dev/"
             />
           </ProjectList.Item>
-          <ProjectList.Item date="2023.12 - 2024.06">
+          <ProjectList.Item date="2024.03 - 2024.06">
             <PortfolioItem
               title="Odinus Project"
               desc="인디 게이밍 런처 개발 프로젝트입니다."
               href="https://odinus.shop"
-            />
-          </ProjectList.Item>
-          <ProjectList.Item date="2024.03 - 2024.05">
-            <PortfolioItem
-              title="Onboxing"
-              desc="탄소 배출 절감을 위한 공유 배송 서비스입니다."
-              href="https://github.com/damie824/onboxing-client"
             />
           </ProjectList.Item>
           <ProjectList.Item date="2023.11 - 2023.12">

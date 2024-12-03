@@ -15,6 +15,13 @@ export default function Categories({ posts }: { posts: Post[] }) {
   const onCategoryButtonClick = (category: string | null): void => {
     setCategory(category);
     setCurrentPage(1);
+    const url = new URL(window.location.href);
+    if (category) {
+      url.searchParams.set("category", category);
+    } else {
+      url.searchParams.delete("category");
+    }
+    window.history.pushState({}, "", url.toString());
   };
 
   const filteredPosts = posts.filter(

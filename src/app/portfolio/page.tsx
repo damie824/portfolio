@@ -27,6 +27,12 @@ export default function Portfolio() {
 
   return (
     <main className="max-w-[900px] mx-auto">
+      <div className="text-center mt-6 mb-12">
+        <h1 className="font-bold text-3xl">Portfolios</h1>
+        <p className="text-white/70 text-sm mt-2">
+          제 포트폴리오들을 확인해 보세요.
+        </p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-5">
         {portfolios
           .sort(
@@ -46,21 +52,22 @@ export default function Portfolio() {
                 <div className=" p-6">
                   <div className="flex gap-2">
                     {portfolio.tags?.map((tag, index) => (
-                      <p className="text-sm text-primary" key={index}>
+                      <p className="text-xs text-primary" key={index}>
                         {tag}
                       </p>
                     ))}
                   </div>
-                  <h3 className="font-bold text-xl">{portfolio.title}</h3>
-                  <p className="text-sm text-white/40">
+                  <h3 className="font-bold text-2xl">{portfolio.title}</h3>
+                  <p className="text-sm text-white/40 break-keep">
                     {portfolio.description}
                   </p>
-                  <div className="flex gap-2 justify-end">
+                  <div className="flex gap-2 justify-end mt-2">
                     {Object.keys(portfolio.url).map((key) => (
                       <a
                         href={portfolio.url[key]}
                         key={key}
-                        className="text-xs"
+                        target="blank_"
+                        className="text-xs uppercase"
                       >
                         {key}
                       </a>

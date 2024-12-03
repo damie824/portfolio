@@ -18,7 +18,7 @@ export type Portfolio = {
   createdAt: IsoDateTimeString
   thumbnail: string
   url: any
-  tags?: string[] | undefined
+  tags: string[]
   /** MDX file body */
   body: MDX
   slug: string

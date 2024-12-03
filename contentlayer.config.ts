@@ -32,7 +32,7 @@ export const Portfolio = defineDocumentType(() => ({
     createdAt: { type: "date", required: true },
     thumbnail: { type: "string", required: true },
     url: { type: "json", required: true },
-    tags: { type: "list", of: { type: "string" }, required: false },
+    tags: { type: "list", of: { type: "string" }, required: true },
   },
   computedFields: {
     slug: {

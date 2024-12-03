@@ -30,7 +30,7 @@ var Portfolio = defineDocumentType(() => ({
     createdAt: { type: "date", required: true },
     thumbnail: { type: "string", required: true },
     url: { type: "json", required: true },
-    tags: { type: "list", of: { type: "string" }, required: false }
+    tags: { type: "list", of: { type: "string" }, required: true }
   },
   computedFields: {
     slug: {
@@ -61,4 +61,4 @@ export {
   Post,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-WA4NZXFR.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-BXWGHLNK.mjs.map

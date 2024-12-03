@@ -99,7 +99,7 @@ export default function Home() {
       </section>
       <section className="p-3 md:p-10 ">
         <h2 className="text-xl font-bold max-w-[700px] mx-auto px-5">
-          그래도 나름 개발자에요
+          본업할 땐 좀 간지 남
         </h2>
         <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[650px]">
           {posts.slice(0, 2).map((post, i) => {
