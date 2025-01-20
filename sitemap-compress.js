@@ -5,6 +5,7 @@ const dirs = ["./public/sitemap"];
 dirs.forEach((dir) => {
   fs.readdirSync(dir).forEach((file) => {
     if (file.endsWith(".xml") && file !== "sitemap.xml") {
+      console.log("Found new sitemap : " + file);
       // gzip
       const fileContents = fs.createReadStream(dir + "/" + file);
       const writeStream = fs.createWriteStream(dir + "/" + file + ".gz");
