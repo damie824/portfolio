@@ -18,6 +18,3 @@ echo "compressing sitemaps.."
 node ./sitemap-compress.js
 node ./sitemap.js
 echo "Successfully compressed sitemaps."
-
-curl http://google.com/ping?sitemap=http://gyuyeon.dev/sitemap.xml
-echo "Sent ping to google.com"
