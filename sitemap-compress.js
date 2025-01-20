@@ -1,5 +1,5 @@
-import zlib from "zlib";
-import fs from "fs";
+const zlib = require("zlib");
+const fs = require("fs");
 
 const dirs = ["./public/sitemap"];
 dirs.forEach((dir) => {

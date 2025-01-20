@@ -1,6 +1,6 @@
-import fs from "fs";
-import prettier from "prettier";
-import { globby } from "globby";
+const fs = require("fs");
+const prettier = require("prettier");
+const { globby } = require("globby");
 
 (async () => {
   const getDate = new Date().toISOString();
