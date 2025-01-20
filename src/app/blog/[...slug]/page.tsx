@@ -81,7 +81,8 @@ export default async function BlogPage({ params }: Props) {
               </div>
               <h1 className="text-4xl font-bold break-keep">{post?.title}</h1>
               <p className="text-sm text-gray-500 mt-2">
-                Gyuyeon Lee - {new Date(post.createdAt).toLocaleDateString()}
+                <Link href={"/"}>Gyuyeon Lee</Link> -{" "}
+                {new Date(post.createdAt).toLocaleDateString()}
               </p>
             </div>
             <Mdx code={post?.body.code || ""} />

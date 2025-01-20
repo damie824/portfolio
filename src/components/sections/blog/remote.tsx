@@ -39,14 +39,12 @@ export default function Remote({ raw }: { raw?: string }) {
         headings.push({ level, text: cleanText, id });
       }
     }
-    console.log("추출된 헤딩:", headings);
 
     return headings;
   };
 
   // raw 마크다운이 변경될 때마다 헤딩 추출
   useEffect(() => {
-    console.log(raw);
     setHeadings(extractHeadings(raw || ""));
   }, [raw]);
 

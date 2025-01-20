@@ -71,7 +71,7 @@ export default function Categories({ posts }: { posts: Post[] }) {
         <div className="flex flex-col gap-3 w-full">
           <div className="bg-yellow-300/10 items-center w-full rounded-md p-3 flex gap-3 border-yellow-500/20 border">
             <p className="text-xl">📰</p>
-            <p>
+            <p className="text-xs md:text-sm">
               반가워요! 이곳은 저 이규연의 개인 블로그 페이지에요.
               <br />
               개발, 일상 등 여러 분야의 글들을 올릴 예정이니 재밌게 읽어주세요!

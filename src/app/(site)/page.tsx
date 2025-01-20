@@ -102,10 +102,12 @@ export default function Home() {
           본업할 땐 좀 간지 남
         </h2>
         <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[650px]">
-          {posts.slice(0, 2).map((post, i) => {
-            if (!post.category.includes("개발")) return;
-            return <Posts key={i} post={post} />;
-          })}
+          {posts
+            .filter((post) => post.category.includes("개발"))
+            .slice(0, 2)
+            .map((post, i) => (
+              <Posts key={i} post={post} />
+            ))}
           <Link
             href="/blog?category=%EA%B0%9C%EB%B0%9C"
             className="text-white/50 text-sm mx-auto w-fit mt-5"
@@ -119,10 +121,12 @@ export default function Home() {
           일 안 할 땐 보통 이러고 놀아요
         </h2>
         <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[650px]">
-          {posts.slice(0, 2).map((post, i) => {
-            if (!post.category.includes("일상")) return;
-            return <Posts key={i} post={post} />;
-          })}
+          {posts
+            .filter((post) => post.category.includes("일상"))
+            .slice(0, 2)
+            .map((post, i) => (
+              <Posts key={i} post={post} />
+            ))}
           <Link
             href="/blog?category=%EC%9D%BC%EC%83%81"
             className="text-white/50 text-sm mx-auto w-fit mt-5"

@@ -15,6 +15,7 @@ export default function ScrollIndicatorExample() {
       setScrollPercent((scrollTop / scrollHeight) * 100);
     };
     scrollRef.current?.addEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => scrollRef.current?.removeEventListener("scroll", handleScroll);
   }, []);
 

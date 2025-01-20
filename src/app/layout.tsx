@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import "@/styles/globals.css";
 import GlobalHeader from "@/components/ui/header";
 import GlobalFooter from "@/components/ui/footer";
+import GoogleTagManager from "@/components/sections/google-tagmanager/google-tagmanager";
 
 const notoSans = Noto_Sans_KR({
   variable: "--noto-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <GlobalHeader />
         {children}
         <GlobalFooter />
+        <GoogleTagManager />
       </body>
     </html>
   );
