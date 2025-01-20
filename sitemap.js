@@ -1,7 +1,3 @@
-const fs = require("fs");
-const { globby } = require("globby");
-const prettier = require("prettier");
-
 const getDate = new Date().toISOString();
 const GYUYEON_DEV_DOMAIN = "https://gyuyeon.dev";
 
@@ -9,6 +5,9 @@ const formatted = async (sitemap) =>
   await prettier.format(sitemap, { parser: "html" });
 
 (async () => {
+  const fs = await import("fs");
+  const prettier = await import("prettier");
+  const { globby } = await import("globby");
   const pages = await globby(["./public/sitemap/*.gz"]);
 
   const sitemapIndex = `
