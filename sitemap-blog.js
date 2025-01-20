@@ -1,8 +1,8 @@
-const fs = require("fs");
-const prettier = require("prettier");
-const { globby } = require("globby");
-
 (async () => {
+  const fs = await import("fs");
+  const prettier = await import("prettier");
+  const { globby } = await import("globby");
+
   const getDate = new Date().toISOString();
   const GYUYEON_DEV_DOMAIN = "https://gyuyeon.dev/blog";
 

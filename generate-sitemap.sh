@@ -11,10 +11,13 @@ node ./sitemap-common.js
 echo "Successfully created common sitemap."
 
 echo "Creating dynamic sitemap.."
-node ./sitemap-posts.js
+node ./sitemap-blog.js
 echo "Successfully created dynamic sitemap."
 
 echo "compressing sitemaps.."
 node ./sitemap-compress.js
-node ./sitemap.js
 echo "Successfully compressed sitemaps."
+
+echo "Creating sitemap index.."
+node ./sitemap.js
+echo "Successfully created sitemap index."
