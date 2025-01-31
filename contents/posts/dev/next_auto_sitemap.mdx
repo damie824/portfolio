@@ -1,0 +1,231 @@
+---
+title: 넥스트로 사이트맵 자동 생성하기
+description: 블로그, 아티클 등 긴 글을 다루는 페이지에서 자주 쓰이는 스크롤 인디케이터를 만들어 봅시다.
+category: ["개발", "웹"]
+createdAt: 2025-01-21
+thumbnail: /thumbnails/dev/next_auto_sitemap.png
+---
+
+## 사이트맵이란?
+
+홈페이지를 검색 엔진에 개시할 때, 검색 엔진은 사이트를 크롤링해 사이트의 내용들을 수집해요.
+
+이 정보의 양과 질에 따라 검색 엔진의 노출도가 결정되는데, 이 노출도를 최대한 끌어올리는 과정을
+SEO(Search Engine Optimization)라고 불러요.
+
+사이트맵을 만드는 것은 SEO 중 가장 중요한 과정 중 하나이며, 검색 엔진에게
+"우리 사이트는 이런 페이지를 가지고 있어요"를 알려 주는 역할을 해요.
+
+## 사이트맵의 구조
+
+사이트맵은 기본적으로 xml 형식을 사용해요. XML 형식으로 우리의 웹사이트엔 어떤 페이지들이 있고,
+이 사이트는 얼마나 중요한지를 검색 엔진에게 알려줄 거에요.
+
+아래는 제 사이트의 사이트맵이에요.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+  <url>
+    <loc>https://gyuyeon.dev/</loc>
+    <lastmod>2025-01-20T13:37:21.500Z</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <!--... 그리고 기타 페이지들-->
+</urlset>
+```
+
+위처럼 사이트맵엔 해당 사이트에 어떤 페이지들이 존재하는지,
+언제 생성 혹은 수정되었는지, 우선순위는 어떻게 되는지 적혀 있어요.
+
+## 자동화가 필요한 이유
+
+제 포트폴리오 사이트의 경우, 6개의 정적인 사이트들과 블로그 글 페이지가 있고,
+업데이트를 통해 새로운 페이지들이 꾸준히 추가될 예정이에요.
+
+이를 사람이 하나하나 쓴다면, 매우 귀찮은 작업일뿐더러 깜빡하고 사이트맵을 업데이트하지 않았다면
+검색 엔진 최적화에 있어 불이익이 생길 수 있어요.
+
+우린 이런 것듫을 사전에 방지하기 위해, 저희의 사이트가 업로드될 때마다 사이트맵을 다시 생성하도록 만들 거에요.
+
+## 자동화하기!
+
+### 스크립트 만들기
+
+우선, 저희의 사이트맵을 생성시킬 스크립트를 작성할 건데
+이 스크립트는 Next.js 환경이 아닌 Node.js환경에서 동작할 것이기에 Next의 환경이 Typescript여도 JS로 작성하시는 것이 좋아요.
+
+원리는 사실 정말 간단한데, Nodejs의 fs를 사용해 page.jsx를 전부 찾은 이후 xml 형식으로 바꾸는 거에요.
+
+```js
+//sitemap-common.js
+(async () => {
+  const fs = await import("fs");
+  const prettier = await import("prettier");
+  const { globby } = await import("globby");
+
+  const getDate = new Date().toISOString();
+  const GYUYEON_DEV_DOMAIN = "https://gyuyeon.dev";
+
+  const formatted = (sitemap) => prettier.format(sitemap, { parser: "html" });
+
+  const pages = await globby([
+    // include
+    "./src/app/**/page.tsx",
+    "./src/app/page.tsx",
+    //exclude
+    "!./src/app/**/[...slug]/*.tsx",
+  ]);
+
+  const pagesSitemap = pages
+    .map((page) => {
+      const path = page
+        .replace("./src/app/", "")
+        .replace("/page.tsx", "")
+        .replace(/\/index/g, "");
+      const routePath = path === "index" ? "" : path;
+      if (routePath.includes("(site)") || /\[.*\]/.test(routePath)) {
+        return "";
+      }
+      return `
+          <url>
+            <loc>${GYUYEON_DEV_DOMAIN}/${routePath}</loc>
+            <lastmod>${getDate}</lastmod>
+            <priority>0.80</priority>
+          </url>
+        `;
+    })
+    .join("");
+
+  const generatedSitemap = `
+  <?xml version="1.0" encoding="UTF-8"?>
+    <urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+        <url>
+            <loc>https://gyuyeon.dev/</loc>
+            <lastmod>2025-01-20T13:37:21.500Z</lastmod>
+            <priority>1.00</priority>
+        </url>
+      ${pagesSitemap}
+    </urlset>
+  `;
+
+  const formattedSitemap = await formatted(generatedSitemap);
+
+  fs.writeFileSync(
+    "./public/sitemap/sitemap-common.xml",
+    formattedSitemap,
+    "utf8"
+  );
+})();
+```
+
+위처럼 폴더 내의 page.tsx를 전부 찾은 후, 해당 경로로 uri를 유추해
+sitemap.xml에 추가하는 스크립트를 작성하였어요.
+
+제 사이트는 추가로 마크다운으로 블로그도 운영하고 있기에 마크다운 파일을 감지할 스크립트도 작성하였어요.
+
+```js
+(async () => {
+  const fs = await import("fs");
+  const prettier = await import("prettier");
+  const { globby } = await import("globby");
+
+  const getDate = new Date().toISOString();
+  const GYUYEON_DEV_DOMAIN = "https://gyuyeon.dev/blog";
+
+  const formatted = (sitemap) => prettier.format(sitemap, { parser: "html" });
+
+  const pages = await globby([
+    // include
+    "./contents/posts/**/*.mdx",
+  ]);
+
+  const pagesSitemap = pages
+    .map((page) => {
+      const path = page.replace("./contents/posts/", "").replace(".mdx", "");
+      const routePath = path === "index" ? "" : path;
+      return `
+          <url>
+            <loc>${GYUYEON_DEV_DOMAIN}/${routePath}</loc>
+            <lastmod>${getDate}</lastmod>
+            <priority>0.50</priority>
+          </url>
+        `;
+    })
+    .join("");
+
+  const generatedSitemap = `
+  <?xml version="1.0" encoding="UTF-8"?>
+    <urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+      ${pagesSitemap}
+    </urlset>
+  `;
+
+  const formattedSitemap = await formatted(generatedSitemap);
+
+  fs.writeFileSync(
+    "./public/sitemap/sitemap-blog.xml",
+    formattedSitemap,
+    "utf8"
+  );
+})();
+```
+
+이전 스크립트와 마찬가지로 .mdx로 끝나는 파일을 전부 찾은 후
+경로를 통해 uri를 유추해 xml로 저장하도록 스크립트를 작성하였습니다.
+
+또한, 호스팅 시 자동으로 해당 스크립트를 실행할 수 있도록 쉘 명령어를 작성해 두었어요.
+
+```sh
+cd public
+
+rm -rf sitemap
+mkdir sitemap
+
+cd ..
+
+echo "Creating common sitemap.."
+node ./sitemap-common.js
+echo "Successfully created common sitemap."
+
+echo "Creating dynamic sitemap.."
+node ./sitemap-blog.js
+echo "Successfully created dynamic sitemap."
+
+echo "compressing sitemaps.."
+node ./sitemap-compress.js
+echo "Successfully compressed sitemaps."
+
+echo "Creating sitemap index.."
+node ./sitemap.js
+echo "Successfully created sitemap index."
+```
+
+이후, package.json에 있는 스크립트를 다음과 같이 수정해 두었어요.
+
+```json
+{
+  //...
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postbuild": "chmod +x ./generate-sitemap.sh && ./generate-sitemap.sh"
+  }
+  //...
+}
+```
+
+이후, 빌드를 진행할 때, build를 하기 이전 postbuild를 사용해
+먼저 사이트맵을 만들게 설정해 두었어요.

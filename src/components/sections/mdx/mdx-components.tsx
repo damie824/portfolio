@@ -120,19 +120,23 @@ const components = {
     <code className="rounded-md" {...props} />
   ),
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
-    const id = Date.now();
+    const [id, setId] = React.useState("");
+
+    React.useEffect(() => {
+      const uniqueId = `pre-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      setId(uniqueId);
+    }, []);
 
     return (
       <pre
-        id={`${id}`}
+        id={id}
         className="relative my-4 overflow-x-auto rounded-lg bg-neutral-900 p-4 font-mono text-sm leading-[1.5] [color-scheme:dark]"
       >
         <div className="absolute right-4 top-4 flex items-center space-x-2">
           <button
             className="hover:bg-white/20 rounded p-2 transition-colors"
             onClick={() => {
-              // pre 엘리먼트 내의 실제 코드 텍스트를 가져옵니다
-              const preElement = document.getElementById(`${id}`);
+              const preElement = document.getElementById(id);
               const codeElement = preElement?.querySelector("code");
               const code = codeElement?.textContent || "";
 
@@ -142,24 +146,19 @@ This code is from https://gyuyeon.dev.`;
 
               console.log(code + watermark);
 
-              // 코드를 클립보드에 복사합니다
               navigator.clipboard.writeText(code + watermark);
 
-              // 토스트 메시지 엘리먼트 생성
               const toast = document.createElement("div");
               toast.className =
                 "fixed bottom-[-100px] right-4 bg-primary text-primary-foreground px-4 py-2 rounded-md shadow-lg transition-all duration-300";
               toast.textContent = "코드가 복사되었습니다!";
 
-              // 토스트를 추가한 직후 애니메이션을 위해 약간의 지연
               setTimeout(() => {
                 toast.style.bottom = "1rem";
               }, 100);
 
-              // 토스트 메시지를 body에 추가
               document.body.appendChild(toast);
 
-              // 3초 후 토스트 메시지 제거
               setTimeout(() => {
                 toast.style.opacity = "0";
                 setTimeout(() => {
