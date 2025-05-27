@@ -29,7 +29,9 @@ export default function Examples({ id }: { id: string }) {
             Github
           </Link>
         </p>
-        {examples.find((example) => example.id === id)?.component}
+        {examples.find((example) => example.id === id)?.component ?? (
+          <p>예시를 찾을 수 없었어요..</p>
+        )}
       </div>
     </>
   );

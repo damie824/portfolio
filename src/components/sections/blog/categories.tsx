@@ -49,7 +49,7 @@ export default function Categories({ posts }: { posts: Post[] }) {
         <h2 className="text-3xl font-bold">{category || "All"}</h2>
       </div>
       <div className="flex flex-col gap-3 mt-5 px-5 md:px-10 md:flex-row mb-12">
-        <div className="flex md:flex-col flex-row gap-3 overflow-y-scroll pb-3 md:w-52 md:pb-5">
+        <div className="flex md:flex-col flex-row gap-3 overflow-y-auto scrollbar-thin pb-3 md:w-52 md:pb-5">
           <p className="text-sm font-bold hidden md:block">🗂️ Categories</p>
           <CategoryItem
             item="All"

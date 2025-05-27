@@ -205,9 +205,22 @@ This code is from https://gyuyeon.dev.`;
     </blockquote>
   ),
   hr: () => <hr className="w-full h-[1px] border-white/20 my-2"></hr>,
-  a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
-    <a className="text-primary hover:underline" {...props} />
-  ),
+  a: ({
+    className,
+    href,
+    ...props
+  }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+    const isExternal = href?.startsWith("http") || href?.startsWith("https");
+    return (
+      <a
+        className="text-primary hover:underline"
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+        href={href}
+        {...props}
+      />
+    );
+  },
   input: ({
     className,
     ...props

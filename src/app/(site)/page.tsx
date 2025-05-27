@@ -81,7 +81,7 @@ export default function Home() {
             <Skill name="Next.js" percent={87} />
             <Skill name="Typescript" percent={80} />
             <Skill name="Rust" percent={71} />
-            <Skill name="Unity" percent={52} />
+            <Skill name="Springboot" percent={52} />
             <Skill name="C#" percent={48} />
           </div>
         </div>

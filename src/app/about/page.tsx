@@ -182,8 +182,11 @@ export default function AboutPage() {
         <h4 className="text-xl text-primary">Educations</h4>
         <div className="w-full h-[1px] bg-border my-3"></div>
         <ProjectList>
+          <ProjectList.Item date="2025.05 -">
+            <p>아르카디아</p>
+          </ProjectList.Item>
           <ProjectList.Item date="2025.03 -">
-            <p>청강문화산업대학교(예정)</p>
+            <p>청강문화산업대학교</p>
           </ProjectList.Item>
           <ProjectList.Item date="2022.03 - 2025.03">
             <p>대평고등학교</p>
