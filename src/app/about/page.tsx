@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="max-w-[900px] mx-auto pt-20 p-5 md:p-20">
+    <main className="max-w-[1200px] mx-auto pt-20 p-5 md:p-20">
       <section>
         <h1 className="0 text-3xl font-bold">이규연 | Damie Lee</h1>
         <div className="flex justify-around mt-16">
@@ -152,7 +152,7 @@ export default function AboutPage() {
             <PortfolioItem
               title="Odinus Project"
               desc="인디 게이밍 런처 개발 프로젝트입니다."
-              href="https://odinus.shop"
+              href="https://web-project-odin.vercel.app/"
             />
           </ProjectList.Item>
           <ProjectList.Item date="2023.11 - 2023.12">
@@ -184,6 +184,9 @@ export default function AboutPage() {
         <ProjectList>
           <ProjectList.Item date="2025.05 -">
             <p>아르카디아</p>
+          </ProjectList.Item>
+          <ProjectList.Item date="2025.03 -">
+            <p>디버거즈(청강문화산업대학교 학생회)</p>
           </ProjectList.Item>
           <ProjectList.Item date="2025.03 -">
             <p>청강문화산업대학교</p>

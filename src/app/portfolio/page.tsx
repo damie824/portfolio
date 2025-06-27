@@ -26,7 +26,7 @@ export default function Portfolio() {
   const portfolios = allPortfolios;
 
   return (
-    <main className="max-w-[900px] mx-auto">
+    <main className="max-w-[1200px] mx-auto">
       <div className="text-center mt-6 mb-12">
         <h1 className="font-bold text-3xl">Portfolios</h1>
         <p className="text-white/70 text-sm mt-2">

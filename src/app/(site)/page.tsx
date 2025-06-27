@@ -34,7 +34,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="max-w-[800px] sm:px-20 relative flex mx-auto h-[300px] py-10 overflow-hidden justify-center sm:justify-start sm:items-end">
+      <section className="max-w-[1200px] sm:px-20 relative flex mx-auto h-[300px] py-10 overflow-hidden justify-center sm:justify-start sm:items-end">
         <div className="flex flex-col gap-5 items-center sm:items-start">
           <div className="text-3xl flex flex-col items-center sm:items-start sm:text-4xl font-bold">
             <p className="text-sm mb-2 font-normal text-white/50">
@@ -71,7 +71,7 @@ export default function Home() {
           clipPath: "polygon(0 0, 100% 0, 100% 90%, 0 100%)",
         }}
       >
-        <div className="max-w-[650px] mx-auto p-10 pb-16">
+        <div className="max-w-[1100px] mx-auto p-10 pb-16">
           <h3 className="text-3xl font-bold">Main Skills</h3>
           <p className="text-sm text-white/50 mt-2">
             제가 가장 잘 다루는 기술들을 소개해드릴게요!
@@ -86,22 +86,22 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="p-10 text-center">
+      <section className="py-10 px-3 text-center">
         <h2 className="text-3xl font-bold text-center">Recent Posts</h2>
-        <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[650px]">
+        <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[1100px]">
           {posts.slice(0, 2).map((post, i) => (
             <Posts key={i} post={post} />
           ))}
+          <Link href="/blog" className="text-white/50 text-sm text-center mt-5">
+            More...
+          </Link>
         </div>
-        <Link href="/blog" className="text-white/50 text-sm text-center mt-5">
-          More...
-        </Link>
       </section>
       <section className="p-3 md:p-10 ">
-        <h2 className="text-xl font-bold max-w-[700px] mx-auto px-5">
+        <h2 className="text-xl font-bold max-w-[1150px] mx-auto px-5">
           본업할 땐 좀 간지 남
         </h2>
-        <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[650px]">
+        <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[1100px]">
           {posts
             .filter((post) => post.category.includes("개발"))
             .slice(0, 2)
@@ -117,10 +117,10 @@ export default function Home() {
         </div>
       </section>
       <section className="p-3 md:p-10 ">
-        <h2 className="text-xl font-bold max-w-[700px] mx-auto px-5">
+        <h2 className="text-xl font-bold max-w-[1150px] mx-auto px-5">
           일 안 할 땐 보통 이러고 놀아요
         </h2>
-        <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[650px]">
+        <div className="flex flex-col gap-5 my-10 text-start sm:w-[80%] mx-auto max-w-[1100px]">
           {posts
             .filter((post) => post.category.includes("일상"))
             .slice(0, 2)

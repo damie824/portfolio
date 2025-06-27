@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function Guestbook() {
   return (
-    <main className="max-w-[800px] mx-auto text-center">
+    <main className="max-w-[1200px] mx-auto text-center">
       <h1 className="text-4xl mt-14 font-bold uppercase">방명록</h1>
       <p className="text-sm mt-5">
         이 페이지는 자유롭게 하고 싶으신 말을 적을 수 있는

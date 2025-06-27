@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <main className="max-w-[900px] mx-auto">
+    <main className="max-w-[1200px] mx-auto">
       <Categories posts={allPosts} />
     </main>
   );

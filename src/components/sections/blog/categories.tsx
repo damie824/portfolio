@@ -10,7 +10,7 @@ export default function Categories({ posts }: { posts: Post[] }) {
   const categories = Array.from(
     new Set(posts.flatMap((post) => post.category))
   );
-  const postsPerPage = 10;
+  const postsPerPage = 5;
 
   const onCategoryButtonClick = (category: string | null): void => {
     setCategory(category);

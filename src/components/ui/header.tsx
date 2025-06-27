@@ -46,7 +46,7 @@ export default function GlobalHeader() {
         }}
         ref={headerRef}
       >
-        <div className="max-w-[800px] mx-auto p-5">
+        <div className="max-w-[1200px] mx-auto p-5">
           <div className="flex uppercase justify-between items-center">
             <Link href={"/"}>
               <h1 className="font-black flex">

@@ -201,7 +201,7 @@ This code is from https://gyuyeon.dev.`;
       {...props}
     >
       <div className="w-1 h-full bg-primary self-stretch absolute left-0"></div>
-      <div className="text-sm py-3 h-fit ml-5">{props.children}</div>
+      <div className="text-sm h-fit ml-5">{props.children}</div>
     </blockquote>
   ),
   hr: () => <hr className="w-full h-[1px] border-white/20 my-2"></hr>,
@@ -237,7 +237,6 @@ This code is from https://gyuyeon.dev.`;
     return <input className={className} {...props} />;
   },
   li: ({ className, ...props }: React.LiHTMLAttributes<HTMLLIElement>) => {
-    // 체크리스트 아이템인지 확인
     const isCheckboxItem =
       props.children?.toString().startsWith("[ ] ") ||
       props.children?.toString().startsWith("[x] ");

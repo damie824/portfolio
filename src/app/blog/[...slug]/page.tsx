@@ -61,9 +61,9 @@ export default async function BlogPage({ params }: Props) {
     }
 
     return (
-      <main className="max-w-[900px] mx-auto relative">
+      <main className="max-w-[1200px] mx-auto relative">
         <div className="md:p-10 px-3 py-10 mb-5 pt-0 lg:flex lg:justify-between">
-          <div className="w-full lg:w-[650px]">
+          <div className="w-full lg:w-[800px]">
             <img
               className="w-full mt-10 rounded-md h-32 object-cover"
               src={post.thumbnail}
