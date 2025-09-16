@@ -1,7 +1,7 @@
-import Remote from "@/components/sections/blog/remote";
-import Share from "@/components/sections/blog/share";
-import Comments from "@/components/sections/comments/comments";
-import { Mdx } from "@/components/sections/mdx/mdx-components";
+import Remote from "@/features/blog/components/remote";
+import Share from "@/features/blog/components/share";
+import Comments from "@/features/comments/components/comments";
+import { Mdx } from "@/features/mdx/components/mdx-components";
 import { posts as allPosts } from "@velite";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";

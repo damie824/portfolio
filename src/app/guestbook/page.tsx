@@ -1,4 +1,4 @@
-import Comments from "@/components/sections/comments/comments";
+import Comments from "@/features/comments/components/comments";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

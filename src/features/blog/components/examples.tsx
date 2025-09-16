@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ScrollIndicatorExample from "./examples/scroll-indicator";
+import ScrollIndicatorExample from "../../../shared/ui/scroll-indicator";
 
 const examples: { id: string; component: React.ReactNode }[] = [
   {
@@ -22,7 +22,7 @@ export default function Examples({ id }: { id: string }) {
           <br />
           Source code is available on{" "}
           <Link
-            href={`https://github.com/damie824/portfolio/tree/main/src/components/sections/blog/examples/${id}.tsx`}
+            href={`https://github.com/damie824/portfolio/tree/main/src/shared/ui/scroll-indicator.tsx`}
             className="underline"
             target="_blank"
           >

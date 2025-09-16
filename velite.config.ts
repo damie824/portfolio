@@ -10,7 +10,7 @@ const posts = defineCollection({
     .object({
       title: s.string().max(99),
       description: s.string().max(999),
-      slug: s.string(),
+      slug: s.string().optional(),
       createdAt: s.string().transform(str => new Date(str)), // Transform string to Date
       thumbnail: s.string(),
       category: s.array(s.string()),
@@ -32,7 +32,7 @@ const portfolios = defineCollection({
     .object({
       title: s.string().max(99),
       description: s.string().max(999),
-      slug: s.string(),
+      slug: s.string().optional(),
       createdAt: s.string().transform(str => new Date(str)), // Transform string to Date
       thumbnail: s.string(),
       url: s.object({

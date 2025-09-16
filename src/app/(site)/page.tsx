@@ -1,4 +1,4 @@
-import HomeTyper from "@/components/sections/home/typer";
+import HomeTyper from "@/features/home/components/typer";
 import Image from "next/image";
 import Link from "next/link";
 import { posts as allPosts, Post } from "@velite";

@@ -1,5 +1,5 @@
-import { posts } from "../../.velite";
-import Categories from "@/components/sections/blog/categories";
+import { posts } from "@velite";
+import Categories from "@/features/blog/components/categories";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

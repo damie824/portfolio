@@ -2,8 +2,8 @@
 
 import * as runtime from 'react/jsx-runtime';
 import * as React from "react";
-import Examples from "../blog/examples";
 import Image from "next/image";
+import Examples from '@/features/blog/components/examples';
 
 const useMDXComponent = (code: string) => {
   const fn = new Function(code);
