@@ -38,7 +38,7 @@ export default function GlobalHeader() {
   return (
     <>
       <header
-        className="fixed w-full bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 z-50"
+        className="fixed w-screen bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 z-50"
         style={{
           borderBottom: scrolled ? "1px solid var(--border)" : "",
           backgroundColor: scrolled ? "#0b0b0bda" : "",
@@ -46,16 +46,16 @@ export default function GlobalHeader() {
         }}
         ref={headerRef}
       >
-        <div className="max-w-[1200px] mx-auto p-5">
-          <div className="flex uppercase justify-between items-center">
-            <Link href={"/"}>
-              <h1 className="font-black flex">
+        <div className="max-w-[1200px] w-full mx-auto p-5 flex justify-between items-center">
+       
+            <Link href={"/"} className="flex-1">
+              <h1 className="font-black flex uppercase">
                 G<span className="hidden sm:block">yu</span>y
                 <span className="hidden sm:block mr-2">eon</span>L
                 <span className="hidden sm:block">ee</span>
               </h1>
             </Link>
-            <div className="flex gap-3 text-xs sm:text-sm">
+            <div className="flex gap-3 text-xs sm:text-sm flex-1 justify-end">
               <Link href={"/about"}>About</Link>
               <Link href={"/blog"}>Blog</Link>
               <Link href={"/portfolio"}>Portfolio</Link>
@@ -64,7 +64,6 @@ export default function GlobalHeader() {
               </Link>
             </div>
           </div>
-        </div>
       </header>
       <div
         style={{
