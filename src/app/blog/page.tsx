@@ -1,4 +1,4 @@
-import { allPosts } from "@/../.contentlayer/generated";
+import { posts } from "../../.velite";
 import Categories from "@/components/sections/blog/categories";
 import { Metadata } from "next";
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <main className="max-w-[1200px] mx-auto">
-      <Categories posts={allPosts} />
+      <Categories posts={posts} />
     </main>
   );
 }

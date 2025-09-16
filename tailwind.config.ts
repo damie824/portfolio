@@ -38,7 +38,6 @@ const config: Config = {
         "typewriter-cursor": "typewriter-cursor 1000ms ease-in-out infinite",
       },
     },
-  },
-  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
+  }
 };
 export default config;

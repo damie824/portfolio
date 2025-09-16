@@ -1,12 +1,25 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect } from "react";
 
+interface DataLayerObject {
+  "gtm.start"?: number;
+  event: string;
+  [key: string]: any; // Allow other properties
+}
+
+declare global {
+  interface Window {
+    dataLayer: DataLayerObject[];
+  }
+}
+
 export default function GoogleTagManager() {
   useEffect(() => {
-    (function (w: any, d: Document, s: string, l: string, i: string) {
-      w[l] = w[l] || [];
-      w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-      var f = d.getElementsByTagName(s)[0] as HTMLElement,
+    (function (w: Window, d: Document, s: string, l: string, i: string) {
+      const dataLayer = (w as any)[l] as any[] || []; // Initialize dataLayer here
+      dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      const f = d.getElementsByTagName(s)[0] as HTMLElement,
         j = d.createElement(s) as HTMLScriptElement,
         dl = l != "dataLayer" ? "&l=" + l : "";
       j.async = true;

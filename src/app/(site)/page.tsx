@@ -1,7 +1,7 @@
 import HomeTyper from "@/components/sections/home/typer";
 import Image from "next/image";
 import Link from "next/link";
-import { allPosts, Post } from "@/contentlayer/generated";
+import { posts as allPosts, Post } from "@velite";
 
 import minimo from "$/profile/minimo.png";
 import { Metadata } from "next";
@@ -168,11 +168,11 @@ function Posts({ post }: { post: Post }) {
         </p>
       </div>
       <p className="text-sm text-white/50">
-        {post.body.raw.replace(/[#*`]/g, "").slice(0, 200)}...
+        {post.description.slice(0, 200)}...
       </p>
       <p className="text-sm text-primary">
         {post.category
-          .map((cat) => `#${cat}`)
+          .map((cat: string) => `#${cat}`)
           .join(" ")
           .replace(/_/g, " ")
           .toUpperCase()}

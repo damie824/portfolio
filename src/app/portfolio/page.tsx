@@ -1,5 +1,6 @@
-import { allPortfolios } from "@/contentlayer/generated";
+import { portfolios as allPortfolios } from "@velite";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "포트폴리오 - 규연.데브",
@@ -45,13 +46,16 @@ export default function Portfolio() {
                 key={index}
                 className="bg-neutral-900 rounded-lg overflow-hidden"
               >
-                <img
+                <Image
                   className="w-full h-40 object-cover"
                   src={portfolio.thumbnail}
+                  alt={portfolio.title}
+                  width={400} // Placeholder width
+                  height={160} // h-40 is 160px
                 />
                 <div className=" p-6">
                   <div className="flex gap-2">
-                    {portfolio.tags?.map((tag, index) => (
+                    {portfolio.tags?.map((tag: string, index: number) => (
                       <p className="text-xs text-primary" key={index}>
                         {tag}
                       </p>

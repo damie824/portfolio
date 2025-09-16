@@ -2,10 +2,11 @@ import Remote from "@/components/sections/blog/remote";
 import Share from "@/components/sections/blog/share";
 import Comments from "@/components/sections/comments/comments";
 import { Mdx } from "@/components/sections/mdx/mdx-components";
-import { allPosts } from "@/contentlayer/generated";
+import { posts as allPosts } from "@velite";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 type Props = {
   params: Promise<{
@@ -64,14 +65,16 @@ export default async function BlogPage({ params }: Props) {
       <main className="max-w-[1200px] mx-auto relative">
         <div className="md:p-10 px-3 py-10 mb-5 pt-0 lg:flex lg:justify-between">
           <div className="w-full lg:w-[800px]">
-            <img
+            <Image
               className="w-full mt-10 rounded-md h-32 object-cover"
               src={post.thumbnail}
               alt={post.title}
+              width={800} // Assuming a reasonable width for the image
+              height={128} // Assuming a reasonable height for the image (h-32 is 128px)
             />
             <div className="mt-8 py-10">
               <div className="text-sm text-primary mb-2 flex gap-3">
-                {post?.category.map((category, index) => {
+                {post?.category.map((category: string, index: number) => {
                   return (
                     <Link key={index} href={`/blog?category=${category}`}>
                       {category}
@@ -85,10 +88,10 @@ export default async function BlogPage({ params }: Props) {
                 {new Date(post.createdAt).toLocaleDateString()}
               </p>
             </div>
-            <Mdx code={post?.body.code || ""} />
+            <Mdx code={post?.content || ""} />
             <Share title={post?.title || ""} />
           </div>
-          <Remote raw={post?.body.raw || ""} />
+          <Remote raw={post?.raw || ""} />
         </div>
         <div className="p-3 md:p-10">
           <Comments />

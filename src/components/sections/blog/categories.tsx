@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/contentlayer/generated";
+import { Post } from "@velite";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -41,7 +41,7 @@ export default function Categories({ posts }: { posts: Post[] }) {
     if (categories.includes(initialCategory || "undefined")) {
       setCategory(initialCategory);
     }
-  }, []);
+  }, [categories]);
 
   return (
     <div className="flex flex-col gap-3">
@@ -149,11 +149,11 @@ function CategoryPosts({ post }: { post: Post }) {
         </p>
       </div>
       <p className="text-sm text-white/50">
-        {post.body.raw.replace(/[#*`]/g, "").slice(0, 200)}...
+        {post.raw.replace(/[#*`]/g, "").slice(0, 200)}...
       </p>
       <p className="text-sm text-primary">
         {post.category
-          .map((cat) => `#${cat}`)
+          .map((cat: string) => `#${cat}`)
           .join(" ")
           .replace(/_/g, " ")
           .toUpperCase()}

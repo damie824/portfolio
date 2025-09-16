@@ -53,17 +53,44 @@ export default function Remote({ raw }: { raw?: string }) {
     // Intersection Observer 설정
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          // 요소가 화면에 보이면 해당 id를 활성 id로 설정
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
+        // 현재 뷰포트 상단 10% 영역에 있는 헤딩들을 필터링하고, 가장 위에 있는 헤딩을 찾습니다.
+        const visibleHeadings = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visibleHeadings.length > 0) {
+          const newActiveId = visibleHeadings[0].target.id;
+          if (newActiveId !== activeId) {
+            setActiveId(newActiveId);
           }
-        });
+        } else {
+          // 뷰포트 상단 10% 영역에 어떤 헤딩도 없는 경우 (섹션 사이 또는 문서의 맨 위/아래)
+          // 뷰포트 상단을 이미 지나간 헤딩 중 가장 마지막 헤딩을 찾아서 활성화합니다.
+          const allHeadingElements = headings
+            .map((h) => document.getElementById(h.id))
+            .filter(Boolean) as HTMLElement[];
+
+          let newActiveId = "";
+          // 뒤에서부터 순회하여 뷰포트 상단 경계를 넘어선 마지막 헤딩을 찾습니다.
+          for (let i = allHeadingElements.length - 1; i >= 0; i--) {
+            const headingElement = allHeadingElements[i];
+            // 헤딩의 상단이 뷰포트의 상단보다 위에 있다면 (즉, 이미 지나갔다면)
+            if (headingElement.getBoundingClientRect().top < 0) {
+              newActiveId = headingElement.id;
+              break;
+            }
+          }
+
+          if (newActiveId !== activeId) {
+            setActiveId(newActiveId);
+          }
+        }
       },
       {
-        // 상단 20%, 하단 80%의 여백을 둠으로써
-        // 헤딩이 화면 중앙 부근에 왔을 때 활성화되도록 설정
-        rootMargin: "-20% 0px -80% 0px",
+        // rootMargin을 조정하여 헤딩이 뷰포트 상단 10% 영역에 들어올 때 활성화되도록 합니다.
+        // 이는 뷰포트 상단에 "트리거 라인"을 생성합니다.
+        rootMargin: "-10% 0px -90% 0px",
+        threshold: 0 // 요소의 어떤 부분이든 rootMargin에 들어오면 트리거
       }
     );
 
@@ -84,7 +111,7 @@ export default function Remote({ raw }: { raw?: string }) {
         }
       });
     };
-  }, [headings]);
+  }, [headings, activeId]);
 
   // 특정 헤딩으로 스크롤하는 함수
   const scrollToHeading = (id: string) => {
@@ -97,7 +124,7 @@ export default function Remote({ raw }: { raw?: string }) {
   // 헤딩의 계층 구조에 따른 번호 생성 함수
   const getNumbering = (index: number, level: number) => {
     let numbering = "";
-    let currentSection = [0, 0, 0, 0, 0, 0]; // h1~h6까지 지원
+    const currentSection = [0, 0, 0, 0, 0, 0]; // h1~h6까지 지원
 
     for (let i = 0; i <= index; i++) {
       const currentHeading = headings[i];

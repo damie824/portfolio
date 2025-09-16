@@ -212,13 +212,13 @@ function ProjectList({
   );
 }
 
-ProjectList.Item = ({
+ProjectList.Item = function ProjectListItem({
   date,
   children,
 }: {
   date: string;
   children?: ReactElement;
-}) => {
+}) {
   return (
     <div className="flex py-4 md:px-5 items-center">
       <div className="w-3 h-3 border-2 border-border rounded-full absolute left-[-7px] bg-background hidden md:block"></div>
