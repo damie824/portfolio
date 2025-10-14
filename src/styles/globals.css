@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f0f0f;
+  --foreground: #fafafa;
+  --border: #ffffff3a;
+  --primary: #f9c537;
+  --primary-foreground: #252525;
+  --card: #080808;
+  --card-foreground: #ffffff;
+}
+
+*::selection {
+  background: #f9c53721;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}

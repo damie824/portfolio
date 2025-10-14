@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://gyuyeon.dev/
+
+# Sitemaps
+Sitemap: https://gyuyeon.dev/sitemap.xml

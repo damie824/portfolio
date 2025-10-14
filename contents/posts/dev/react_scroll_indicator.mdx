@@ -1,0 +1,182 @@
+---
+title: 리액트로 스크롤 인디케이터 만들기
+description: 블로그, 아티클 등 긴 글을 다루는 페이지에서 자주 쓰이는 스크롤 인디케이터를 만들어 봅시다.
+category: ["개발", "웹"]
+createdAt: 2024-11-13
+thumbnail: /thumbnails/dev/react_scroll_indicator.png
+---
+
+## 스크롤 인디케이터란?
+
+매우 긴 페이지를 사용할 때, 현재 읽고 있는 위치를 알려주는 인디케이터를 의미해요.
+페이지가 너무 과도한 스크롤을 요구하면 유저에게 피로도를 안겨줄 수 있어요.
+스크롤 인디케이터는 이런 피로도를 줄여주는 역할을 해요.
+
+### 예시
+
+이 페이지의 상단에도 스크롤 인디케이터가 있는 것을 알 수 있어요.
+페이지를 내리다 보면, 헤더 바로 아래에 노란색 바가 나타나는 것을 볼 수 있어요.
+이 바를 "스크롤 인디케이터" 라고 해요.
+
+아래에 간단한 예시를 하나 만들어 볼게요.
+
+<Examples id="scroll-indicator" />
+
+위처럼, 스크롤 에디터를 사용하면 사용자가 내가 지금 이 글의 어느 정도를 읽었는지,
+읽지 않은 부분이 얼마나 남았는지 알 수 있어요.
+
+## 그래서 어떻게 만들어요?
+
+원리는 생각보다 간단합니다.
+예제는 Tailwind CSS를 사용했지만, 사용하지 않았다는 가정 하에 설명해 드릴게요.
+먼저, 아래와 같은 상황이라고 가정합시다.
+
+```jsx
+export default function App() {
+  return <div>여기에 긴 글이 있어요</div>;
+}
+```
+
+위의 div 안에 긴 글이 있다고 가정합시다.
+
+### 스크롤 이벤트 추적
+
+저희는 저 div에 스크롤 인디케이터를 삽입하고 싶은 상황입니다.
+이런 상황에선, 스크롤 이벤트를 추적할 수 있는 함수를 하나 만들어야 합니다.
+
+useEffect와 eventListener를 사용한다면, 유저가 스크롤을 했을 때 그에 대한 이벤트를 추적할 수 있어요.
+
+```jsx
+export default function App() {
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log("스크롤 이벤트가 발생했어요.");
+    };
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
+  return <div>여기에 긴 글이 있어요</div>;
+}
+```
+
+위와 같이 설정해 두었다면, 유저가 스크롤을 할 시 handleScroll 함수가 호출되어
+콘솔에 "스크롤 이벤트가 발생했어요."라는 메시지가 출력될 거에요.
+
+### 스크롤 위치 추적
+
+이벤트리스너로 스크롤될 때마다 함수를 호출시키도록 만들었으니,
+이제 스크롤 위치를 추적해야 합니다.
+얼마나 추적했는지 알아야 스크롤 인디케이터의 크기를 조정할 수 있으니까요.
+
+스크롤 위치는 window.scrollY 프로퍼티로 추적할 수 있어요.
+이 위치를 찾아 저장해 두면, 스크롤 인디케이터의 크기를 조정할 때 사용할 수 있어요.
+
+```jsx
+export default function App() {
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      console.log(scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
+  //.. 그리고 나머지 코드들
+}
+```
+
+이제 다시 스크롤 해 보시면, 스크롤 위치를 추적하는 함수가 호출되어
+콘솔에 스크롤 위치를 출력할 거에요.
+
+### 퍼센트 계산
+
+이제 스크롤 위치까지 알아냈으니, 얼마나 스크롤되었는지 퍼센트로 계산해 봅시다.
+이렇게 변환해 두어야 나중에 css에 삽입하기 편할 거에요.
+
+이렇게 퍼센트로 계산해둔 것을, 스테이트에 저장해 두어,
+이 퍼센트가 변할 때마다 인디케이터를 다시 랜더링하게 만들면 좋을 것 같아요.
+
+```jsx
+export default function App() {
+  const [scrollPercent, setScrollPercent] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const scrollPercent = (scrollY / document.body.scrollHeight) * 100;
+    };
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
+  //.. 그리고 나머지 코드들
+}
+```
+
+### 인디케이터 랜더링
+
+이제 거의 다 왔어요.
+이제 스테이트에 저장해 둔 퍼센트를 사용해서, 인디케이터를 랜더링해 봅시다.
+
+우선, 인디케이터를 스타일링해 볼게요.
+fixed로 화면 가장 상단에 두고, 기본 너비는 0%로, 왼쪽에 고정되게 만들어 보겠습니다.
+
+```css
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: yellow;
+}
+```
+
+이제, 인디케이터로 사용할 div를 하나 만들고, 이 스타일을 적용해 볼게요.
+
+```jsx
+export default function App() {
+  //.. 퍼센트 구하는 코드들이 여기에 있어요.
+  return (
+    <>
+      <div className="scroll-indicator"></div>
+      <div>여기에 긴 글이 있어요</div>
+    </>
+  );
+}
+```
+
+좋습니다. 이제 보이진 않지만 인디케이터 역할을 하는 div가 생겼어요.
+
+이제 이 div의 너비를 스테이트에 저장해 둔 퍼센트로 설정해 봅시다.
+매우 간단해요. width를 지정해 둔 퍼센트로 변환하기만 하면 됩니다.
+
+position:fixed로 설정된 div의 100%는 화면 너비를 의미하기에
+스크롤 된 양을 퍼센트로 변환을 이미 해 두었으니, 그대로 사용하면 됩니다.
+
+```jsx
+export default function App() {
+  const [scrollPercent, setScrollPercent] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const scrollPercent = (scrollY / document.body.scrollHeight) * 100;
+    };
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <>
+      <div
+        className="scroll-indicator"
+        style={{ width: `${scrollPercent}%` }}
+      ></div>
+      <div>여기에 긴 글이 있어요</div>
+    </>
+  );
+}
+```
+
+스크롤 인디케이터를 완성했어요.
+
+이 스크롤 인디케이터의 스타일을 자유롭게 조절하고, 위치를 바꿔보는 것도 좋은 연습이에요.
